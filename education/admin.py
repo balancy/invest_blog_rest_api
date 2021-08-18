@@ -11,5 +11,5 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Mentor)
 class MentorAdmin(admin.ModelAdmin):
-    list_display = "id", "user", "status"
+    list_display = "id", "fullname", "user", "status"
     raw_id_fields = "user",

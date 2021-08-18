@@ -16,6 +16,13 @@ class Mentor(models.Model):
         verbose_name="Статус",
     )
 
+    fullname = models.CharField(
+        max_length=200,
+        default='',
+        blank=True,
+        verbose_name="Полное имя",
+    )
+
     bio = models.TextField(
         default='',
         blank=True,
@@ -44,7 +51,13 @@ class Course(models.Model):
         verbose_name="Название",
     )
 
-    description = models.TextField(
+    short_description = models.TextField(
+        default="",
+        blank=True,
+        verbose_name="Описание курса",
+    )
+
+    full_description = models.TextField(
         default="",
         blank=True,
         verbose_name="Описание курса",
