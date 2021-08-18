@@ -9,5 +9,5 @@ router.register('mentors', views.MentorsViewSet)
 router.register('courses', views.CoursesViewSet)
 
 urlpatterns = [
-    path('/', include(router.urls)),
+    path('', include(router.urls)),
 ]
