@@ -33,8 +33,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework',
+    'rest_framework_simplejwt',
 
     'education.apps.EducationConfig',
+    'simplejwt.apps.SimplejwtConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,14 @@ CORS_ORIGIN_WHITELIST = [
      'http://localhost:8080',
      'http://localhost:3000'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'blog.permissions.IsAdminUserOrReadOnly',
+    ]
+}
