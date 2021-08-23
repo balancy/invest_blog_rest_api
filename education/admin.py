@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from education.models import Course, Mentor
+from education.models import Course, Mentor, Student
 
 
 @admin.register(Course)
@@ -11,5 +11,11 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Mentor)
 class MentorAdmin(admin.ModelAdmin):
+    list_display = "id", "fullname", "user", "status"
+    raw_id_fields = "user",
+
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
     list_display = "id", "fullname", "user", "status"
     raw_id_fields = "user",

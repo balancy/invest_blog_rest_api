@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Course, Mentor
+from .models import Course, Mentor, Student
 
 
 class MentorSerializer(serializers.ModelSerializer):
@@ -8,6 +8,14 @@ class MentorSerializer(serializers.ModelSerializer):
         model = Mentor
         fields = "id", "user", "fullname", "status", "bio"
         view_name = "mentors"
+
+
+class StudentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Student
+        fields = "id", "user_id", "fullname", "status", "bio", "courses"
+
+        view_name = "students"
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):

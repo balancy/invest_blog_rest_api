@@ -69,3 +69,45 @@ class Course(models.Model):
 
     def __str__(self):
         return f"{self.__class__.__name__} <{self.title}>"
+
+
+class Student(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT,
+        verbose_name="Пользователь",
+    )
+
+    status = models.CharField(
+        max_length=200,
+        default="",
+        blank=True,
+        verbose_name="Статус",
+    )
+
+    fullname = models.CharField(
+        max_length=200,
+        default='',
+        blank=True,
+        verbose_name="Полное имя",
+    )
+
+    bio = models.TextField(
+        default="",
+        blank=True,
+        verbose_name="Биография",
+    )
+
+    courses = models.ManyToManyField(
+        Course,
+        blank=True,
+        related_name="students",
+        verbose_name="Курсы",
+    )
+
+    class Meta:
+        verbose_name = "Студент"
+        verbose_name_plural = "Студенты"
+
+    def __str__(self):
+        return f"{self.__class__.__name__} <{self.user}>"

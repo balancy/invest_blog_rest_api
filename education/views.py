@@ -2,13 +2,18 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Course, Mentor
-from .serializers import CourseSerializer, MentorSerializer
+from .models import Course, Mentor, Student
+from .serializers import CourseSerializer, MentorSerializer, StudentSerializer
 
 
 class MentorsViewSet(ModelViewSet):
     queryset = Mentor.objects.all()
     serializer_class = MentorSerializer
+
+
+class StudentsViewSet(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
 
 class CoursesViewSet(ModelViewSet):
