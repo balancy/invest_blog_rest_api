@@ -25,7 +25,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
         view_name = "courses"
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         depth = 2
