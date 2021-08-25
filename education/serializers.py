@@ -11,17 +11,17 @@ class MentorSerializer(serializers.ModelSerializer):
         view_name = "mentors"
 
 
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = "id", "fullname", "status", "bio", "courses"
+        fields = "id", "user_id", "fullname", "status", "bio", "courses"
         view_name = "students"
 
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = "id", "mentor", "title", "short_description", "full_description"
+        fields = "id", "mentor", "students", "title", "short_description", "full_description"
         view_name = "courses"
 
 
