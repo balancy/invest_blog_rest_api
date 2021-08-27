@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class Mentor(models.Model):
     user = models.OneToOneField(
-        User,
+        get_user_model(),
         on_delete=models.PROTECT,
         verbose_name="Пользователь",
     )
@@ -34,7 +34,7 @@ class Mentor(models.Model):
         verbose_name_plural = 'Преподаватели'
 
     def __str__(self):
-        return f'{self.__class__.__name__} <{self.user}>'
+        return f'{self.__class__.__name__} <{self.fullname}>'
 
 
 class Course(models.Model):
@@ -73,7 +73,7 @@ class Course(models.Model):
 
 class Student(models.Model):
     user = models.OneToOneField(
-        User,
+        get_user_model(),
         on_delete=models.PROTECT,
         verbose_name="Пользователь",
     )
@@ -110,4 +110,4 @@ class Student(models.Model):
         verbose_name_plural = "Студенты"
 
     def __str__(self):
-        return f"{self.__class__.__name__} <{self.user}>"
+        return f"{self.__class__.__name__} <{self.fullname}>"
