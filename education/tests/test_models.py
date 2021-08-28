@@ -1,7 +1,6 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
-
 from education.models import Course, Mentor, Student
+from mixer.backend.django import mixer
 
 
 class MentorModelTest(TestCase):
@@ -15,51 +14,19 @@ class MentorModelTest(TestCase):
 
 
 class StudentModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        user = get_user_model().objects.create(
-            first_name='user2',
-            email='user2@gmail.com',
-            username='user2',
-            password='pass',
-        )
-
-        Student.objects.create(
-            user=user,
-            fullname="Mike Tyson",
-        )
-
     def test_default_status_blank_attribute(self):
         status_is_blank = Student._meta.get_field("status").blank
         self.assertTrue(status_is_blank)
 
     def test_object_name_is_in_correct_format(self):
-        student = Student.objects.first()
+        student = mixer.blend(Student)
         expected_object_name = f'Student <{student.fullname}>'
         self.assertEqual(str(student), expected_object_name)
 
 
 class CourseModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        user = get_user_model().objects.create(
-            first_name='user3',
-            email='user3@gmail.com',
-            username='user3',
-            password='pass',
-        )
-
-        mentor = Mentor.objects.create(
-            user=user,
-            fullname="Peter Parker",
-        )
-
-        Course.objects.create(
-            mentor=mentor,
-            title="new course",
-
-        )
-
-    def test_default_short_description_is_empty(self):
-        course = Course.objects.first()
+    def test_unnecessary_fields_by_default_are_empty(self):
+        course = mixer.blend(Course)
+        self.assertTrue(not course.title)
         self.assertTrue(not course.short_description)
+        self.assertTrue(not course.full_description)

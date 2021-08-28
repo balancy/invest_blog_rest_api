@@ -1,4 +1,6 @@
-from django.contrib.auth.models import User
+from blog.permissions import IsAdminUserOrReadOnly
+from django.contrib.auth import get_user_model
+from django.urls import reverse
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
@@ -8,7 +10,6 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Course, Mentor, Student
 from .serializers import (CourseSerializer, MentorSerializer,
                           StudentSerializer, UserSerializer)
-from blog.permissions import IsAdminUserOrReadOnly
 
 
 class MentorsViewSet(ModelViewSet):
@@ -39,10 +40,10 @@ class CoursesViewSet(ModelViewSet):
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = get_user_model().objects.all()
 
     def retrieve(self, request, pk=None):
-        queryset = User.objects.filter(username=pk)
+        queryset = get_user_model().objects.filter(username=pk)
         user = queryset.first()
         serializer = UserSerializer(user)
         return Response(serializer.data)

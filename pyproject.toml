@@ -10,11 +10,11 @@ Django = "^3.2.6"
 python-dotenv = "^0.19.0"
 django-cors-headers = "^3.8.0"
 django-filter = "^2.4.0"
-django-rest-framework = "^0.1.0"
 djangorestframework-simplejwt = "^4.8.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.7"
+mixer = "^7.1.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
